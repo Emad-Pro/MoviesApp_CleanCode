@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.movie_app_clean_code">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="movie_app_clean_code"
+        android:label="MovieApp"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

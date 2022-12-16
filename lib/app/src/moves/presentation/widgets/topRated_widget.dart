@@ -20,7 +20,6 @@ Widget topRatedMoviesWidget(BuildContext context, {required MoviesState getTopRa
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: 5,
         itemBuilder: (context, index) {
           final movie = getTopRatedMoviesState.getTopRatedMovies!.result[index];
           return Container(

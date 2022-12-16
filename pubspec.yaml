@@ -49,11 +49,13 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   number_paginator: ^0.2.2
   animated_conditional_builder: ^0.0.5
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_native_splash: ^2.2.16
+  flutter_launcher_icons: "^0.11.0"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -61,6 +63,29 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
+flutter_native_splash:
+  image: assets/image/splash/splash.png
+  color: "#121212"
+  android_12:
+    image: assets/image/splash/splash.png
+    color: "#121212"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/icon/icon.png"
+  web:
+    generate: true
+    image_path: "assets/image/icon/icon.png"
+    background_color: "#121212"
+    theme_color: "#121212"
+  windows:
+    generate: true
+    image_path: "assets/image/icon/icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/image/icon/icon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

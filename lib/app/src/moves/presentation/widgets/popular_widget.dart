@@ -21,7 +21,6 @@ Widget popularMoviesWidget(BuildContext context, {required MoviesState getPopula
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: 5,
         itemBuilder: (context, index) {
           final movie = getPopularMoviesState.getPopularMovies!.result[index];
           return Container(
