@@ -25,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: getIt<SearchBloc>()..add(const GetSearchDataEvent(query: '00000000000', pageNum: 1)),
+      value: getIt<SearchBloc>(),
       child: BlocConsumer<SearchBloc, SearchState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -40,26 +40,32 @@ class _SearchScreenState extends State<SearchScreen> {
                       TextFormField(
                         controller: textEditingController,
                         onChanged: (value) {
-                          getIt<SearchBloc>().add(GetSearchDataEvent(query: value, pageNum: 1));
+                          if (value.isNotEmpty) {
+                            getIt<SearchBloc>().add(GetSearchDataEvent(query: value, pageNum: 1));
+                          }
                         },
-                        decoration: const InputDecoration(border: OutlineInputBorder()),
+                        decoration:
+                            const InputDecoration(border: OutlineInputBorder(), hintText: "Search"),
                       ),
                       const SizedBox(
                         height: 15,
                       ),
-                      if (state.querySearchData!.totalPages > 0)
+                      if (textEditingController.text.isNotEmpty)
                         NumberPaginator(
                           numberPages: state.querySearchData!.totalPages > 500
                               ? 500
                               : state.querySearchData!.totalPages,
                           onPageChange: (int pageNum) {
-                            getIt<SearchBloc>().add(GetSearchDataEvent(
-                                query: textEditingController.text, pageNum: pageNum + 1));
+                            if (textEditingController.text.isNotEmpty) {
+                              getIt<SearchBloc>().add(GetSearchDataEvent(
+                                  query: textEditingController.text, pageNum: pageNum + 1));
+                            }
                           },
                         ),
                       Expanded(
                         child: AnimatedConditionalBuilder(
-                            condition: state.querySearchData != null,
+                            condition: state.querySearchData != null &&
+                                textEditingController.text.isNotEmpty,
                             builder: (context) {
                               return ListView.separated(
                                 separatorBuilder: (context, index) {
@@ -168,24 +174,25 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                             .info_outline_sharp),
                                                               ),
                                                             ),
-                                                            Container(
-                                                              padding: const EdgeInsets.symmetric(
-                                                                vertical: 2.0,
-                                                                horizontal: 8.0,
-                                                              ),
-                                                              decoration: BoxDecoration(
-                                                                color: Colors.red[800],
-                                                                borderRadius:
-                                                                    BorderRadius.circular(4.0),
-                                                              ),
-                                                              child: Text(
-                                                                movie.releaseDate.split('-')[0],
-                                                                style: const TextStyle(
-                                                                  fontSize: 16.0,
-                                                                  fontWeight: FontWeight.w500,
+                                                            if (movie.releaseDate != '')
+                                                              Container(
+                                                                padding: const EdgeInsets.symmetric(
+                                                                  vertical: 2.0,
+                                                                  horizontal: 8.0,
+                                                                ),
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.red[800],
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(4.0),
+                                                                ),
+                                                                child: Text(
+                                                                  movie.releaseDate.split('-')[0],
+                                                                  style: const TextStyle(
+                                                                    fontSize: 16.0,
+                                                                    fontWeight: FontWeight.w500,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
                                                             Row(
                                                               children: [
                                                                 Icon(
